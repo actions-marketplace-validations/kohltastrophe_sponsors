@@ -1,0 +1,33 @@
+{
+	"name": "@kohltastrophe/sponsors",
+	"version": "1.0.0",
+	"description": "Zero-dependency node24 GitHub Action and CLI for generating light/dark-aware Sponsors walls and platform CTA SVGs onto an orphan branch.",
+	"license": "MIT",
+	"author": "Kohl <kohltastrophe@gmail.com>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kohltastrophe/sponsors.git"
+	},
+	"type": "module",
+	"main": "./sponsors.mjs",
+	"exports": {
+		".": "./sponsors.mjs",
+		"./worker": "./worker.mjs"
+	},
+	"bin": {
+		"sponsors": "./sponsors.mjs"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"files": [
+		"sponsors.mjs",
+		"src",
+		"worker.mjs",
+		"action.yml",
+		"wrangler.toml"
+	],
+	"scripts": {
+		"test": "node --test test/*.test.mjs"
+	}
+}

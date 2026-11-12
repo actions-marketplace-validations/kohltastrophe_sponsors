@@ -1,0 +1,4 @@
+node_modules/
+plexer/
+.DS_Store
+release-notes.md
