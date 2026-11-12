@@ -1,0 +1,89 @@
+name: "Sponsors SVG & Badges"
+description: "Generate a light/dark-aware sponsors.svg wall and platform CTA cards onto an orphan branch."
+author: "Kohl"
+
+branding:
+  icon: "heart"
+  color: "purple"
+
+inputs:
+  token:
+    description: "GitHub token for reading GitHub Sponsors tiers (read:user / read:org); falls back to push-token when empty"
+    required: false
+    default: ${{ github.token }}
+  push-token:
+    description: "GitHub token for pushing to the orphan branch (defaults to github.token)"
+    required: false
+    default: ${{ github.token }}
+  login:
+    description: "GitHub user or organization login override (auto-detected from .github/FUNDING.yml or repository owner)"
+    required: false
+    default: ""
+  kofi:
+    description: "Ko-fi handle or URL override (auto-detected from .github/FUNDING.yml)"
+    required: false
+    default: ""
+  opencollective:
+    description: "OpenCollective slug override (auto-detected from .github/FUNDING.yml)"
+    required: false
+    default: ""
+  config:
+    description: "Path to optional JSON configuration and extra sponsors file"
+    required: false
+    default: ".github/sponsors.json"
+  output:
+    description: "Output SVG path for the unified sponsors wall (defaults to $RUNNER_TEMP/sponsors/sponsors.svg)"
+    required: false
+    default: ""
+  branch:
+    description: "Orphan Git branch to publish generated SVGs and rolling state onto (empty to skip branch publish)"
+    required: false
+    default: "badges"
+  push:
+    description: "Force-push the updated orphan branch to origin"
+    required: false
+    default: "true"
+  dry-run:
+    description: "Render SVGs and preview state without updating branches or pushing (auto-reads workflow_dispatch inputs.dry_run when omitted)"
+    required: false
+    default: ""
+  featured-threshold:
+    description: "Monthly dollar threshold for the Featured sponsors tier"
+    required: false
+    default: ""
+  active-window-days:
+    description: "Rolling active window in days for Ko-fi records"
+    required: false
+    default: ""
+  exclude:
+    description: "Comma-separated logins to exclude from the sponsors wall"
+    required: false
+    default: ""
+  include-past:
+    description: "Include past/inactive GitHub sponsors"
+    required: false
+    default: "false"
+  kofi-payload:
+    description: "JSON string of a Ko-fi webhook payload to ingest (auto-reads client_payload.kofi on repository_dispatch)"
+    required: false
+    default: ""
+  working-directory:
+    description: "Repository root directory"
+    required: false
+    default: "."
+
+outputs:
+  sponsors_count:
+    description: "Total number of public sponsors rendered"
+  has_recurring:
+    description: "Whether active recurring sponsors exist"
+  dry_run:
+    description: "Whether this invocation ran in dry-run mode"
+  svg_path:
+    description: "Path to the generated sponsors.svg file"
+  cards:
+    description: "Comma-separated paths to the generated platform CTA SVG cards"
+
+runs:
+  using: "node24"
+  main: "sponsors.mjs"
